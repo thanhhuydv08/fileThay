@@ -1,0 +1,48 @@
+﻿package thucHanh;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class GhiDocChar {
+
+	public static void main(String[] args) {
+		String s ="Trung tâm tin học Đại học Khoa học tự nhiên";
+		try {
+			
+//			FileWriter fw = new FileWriter("t3h.txt");
+//			fw.write(s);
+//			fw.close();
+			
+			BufferedWriter bw = new BufferedWriter(new FileWriter("t3h.txt"));
+			bw.write(s);
+			bw.close();
+			
+			System.out.println("Da ghi xong tap tin");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+//			FileReader fr = new FileReader("t3h.txt");
+//			int c;
+//			while((c=fr.read())!=-1)
+//				System.out.print((char)c);
+//			fr.close();
+			
+			BufferedReader br = new BufferedReader(new FileReader("t3h.txt"));
+			int c;
+			while((c=br.read())!=-1)
+				System.out.print((char)c);
+			br.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

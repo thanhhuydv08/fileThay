@@ -1,0 +1,33 @@
+﻿package thucHanh;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class GhiDocData {
+
+	public static void main(String[] args) throws IOException {
+		int[] a = {1,5,3,2,4};
+		DataOutputStream dos = new DataOutputStream(new FileOutputStream("mang.dat"));
+		for(int so: a)
+			dos.writeInt(so);
+		dos.close();
+		
+		DataInputStream dis = new DataInputStream(new FileInputStream("mang.dat"));
+		int so;
+		while(true) {
+			try {
+				so=dis.readInt();
+				System.out.print(so+" ");
+			}catch(EOFException eofx) {
+				break;
+			}
+		}
+		dis.close();
+	}
+
+}
