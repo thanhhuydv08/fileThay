@@ -1,0 +1,30 @@
+package thucHanh;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+public class Vd1 {
+
+	public static void main(String[] args) {
+		Path p1 = Paths.get("c:\\users\\hv\\pictures\\aman.jpg");
+		System.out.println("Ten tap tap tin la: "+p1.getFileName());
+		System.out.println("Thu muc: "+p1.getParent());
+		
+		Path p2 = Paths.get("d:\\namsinh.jpg");
+		
+		try {
+			//co roi thi khong copy
+//			if(!Files.exists(p2))
+//				Files.copy(p1, p2);
+			
+			//co roi van ghi de
+			Files.copy(p1, p2, StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}
