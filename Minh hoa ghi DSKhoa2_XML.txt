@@ -1,0 +1,49 @@
+		JButton btnGhi = new JButton("Ghi");
+		btnGhi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+				try {
+					DocumentBuilder db = dbf.newDocumentBuilder();
+					File file = new File("src/thucHanh/dskhoa2.xml");
+					Document doc;
+					if(file.isFile())  
+						doc = db.parse(file);
+					else 
+						doc = db.newDocument();
+					
+					Element dskhoaNode = doc.getDocumentElement();
+					if(dskhoaNode==null) {
+						dskhoaNode = doc.createElement("dskhoa");
+						doc.appendChild(dskhoaNode);
+					}
+					
+					Element khoaNode = doc.createElement("khoa");
+					dskhoaNode.appendChild(khoaNode);
+					
+					Element makhNode = doc.createElement("makh");
+					khoaNode.appendChild(makhNode);
+					
+					Text makhText = doc.createTextNode(txtMaKH.getText());
+					makhNode.appendChild(makhText);
+					
+					Element tenkhNode = doc.createElement("tenkh");
+					khoaNode.appendChild(tenkhNode);
+					
+					Text tenkhText = doc.createTextNode(txtTenKH.getText());
+					tenkhNode.appendChild(tenkhText);
+					
+					TransformerFactory tff  = TransformerFactory.newInstance();
+					Transformer tf = tff.newTransformer();
+					
+					DOMSource source = new DOMSource(doc);
+					Result result = new StreamResult(file);
+					
+					tf.transform(source, result);
+					
+					
+				} catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		});
