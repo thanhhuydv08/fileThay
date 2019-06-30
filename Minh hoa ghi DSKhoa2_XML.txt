@@ -6,13 +6,13 @@
 					DocumentBuilder db = dbf.newDocumentBuilder();
 					File file = new File("src/thucHanh/dskhoa2.xml");
 					Document doc;
-					if(file.isFile())  
+					if(file.isFile())  // tai sao phai nhu vay => vi muon ghi them data vao file neu file ban dau chua co thi tao moi, khi add data them thi so sanh file da co den ghi them vao
 						doc = db.parse(file);
 					else 
 						doc = db.newDocument();
 					
 					Element dskhoaNode = doc.getDocumentElement();
-					if(dskhoaNode==null) {
+					if(dskhoaNode==null) {// kiem tra file da ton tai co doc chua, neu chua thi tao moi va ghi data, neu co roi thi ghi them vao doc cu : vd luc dau ghi makh : av va tenkh : anh van , gio toi muon ghi them VL , vat ly nua nen bat buoc phai so sanh da co doc chua moi ghi them duoc
 						dskhoaNode = doc.createElement("dskhoa");
 						doc.appendChild(dskhoaNode);
 					}
