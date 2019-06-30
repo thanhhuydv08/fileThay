@@ -1,0 +1,57 @@
+package thucHanh;
+
+import java.io.File;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Text;
+
+public class GhiKhoa {
+
+	public static void main(String[] args) {
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		try {
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.newDocument();
+			
+			Element khoaNode = doc.createElement("khoa");
+			doc.appendChild(khoaNode);
+			
+			Element makhNode = doc.createElement("makh");
+			khoaNode.appendChild(makhNode);
+			
+			Text makhText = doc.createTextNode("AV");
+			makhNode.appendChild(makhText);
+			
+			Element tenkhNode = doc.createElement("tenkh");
+			khoaNode.appendChild(tenkhNode);
+			
+			Text tenkhText = doc.createTextNode("Anh van");
+			tenkhNode.appendChild(tenkhText);
+			
+			TransformerFactory tff  = TransformerFactory.newInstance();
+			Transformer tf = tff.newTransformer();
+			
+			DOMSource source = new DOMSource(doc);
+			Result result = new StreamResult(new File("src/thucHanh/khoa2.xml"));
+			
+			tf.transform(source, result);
+			
+		} catch (ParserConfigurationException | TransformerException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+}

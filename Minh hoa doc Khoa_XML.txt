@@ -1,0 +1,51 @@
+package thucHanh;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+public class DocKhoa {
+
+	public static void main(String[] args) {
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		try {
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.parse(new File("src/thucHanh/khoa.xml"));
+			
+			Element nodeGoc = doc.getDocumentElement();
+			System.out.println("Node name: "+nodeGoc.getNodeName());
+			System.out.println("Node type: "+nodeGoc.getNodeType());
+			System.out.println("Node value: "+nodeGoc.getNodeValue());
+			System.out.println("Text content: "+nodeGoc.getTextContent());
+			System.out.println("NodeLength: "+nodeGoc.getChildNodes().getLength());
+			NodeList nodeList = nodeGoc.getChildNodes();
+			for(int i=0;i<nodeList.getLength(); i++) {
+				Node node = nodeList.item(i);
+				System.out.println(node.getNodeName());
+			}
+			String makh="", tenkh="";
+			for(int i=0; i<nodeList.getLength(); i++) {
+				Node node = nodeList.item(i);
+				if(node.getNodeType()==Node.ELEMENT_NODE) {
+					if(node.getNodeName().equals("makh"))
+						makh=node.getTextContent();
+					else
+						tenkh=node.getTextContent();
+				}
+			}
+			System.out.println("Ma khoa: "+makh + " ---- "+ "Ten khoa: "+tenkh);
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+}
