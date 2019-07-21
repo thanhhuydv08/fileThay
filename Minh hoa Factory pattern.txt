@@ -1,0 +1,43 @@
+﻿package thucHanh;
+
+interface Hinh3{
+	void xuat();
+}
+class HT3 implements Hinh3{
+	@Override
+	public void xuat() {
+		System.out.println("Hinh tron");
+	}
+}
+class HCN3 implements Hinh3{
+	@Override
+	public void xuat() {
+		System.out.println("Hinh chu nhat");
+	}
+}
+class TG3 implements Hinh3{
+	@Override
+	public void xuat() {
+		System.out.println("Hinh tam giac");
+	}
+}
+class Factory{
+	public static Hinh3 getHinh(String ten) {
+		if(ten.equalsIgnoreCase("ht"))
+			return new HT3();
+		else if (ten.equalsIgnoreCase("hcn"))
+			return new HCN3();
+		else if(ten.equalsIgnoreCase("tg"))
+			return new TG3();
+		else
+			return null;
+	}
+}
+public class FactoryPattern {
+	public static void main(String[] args) {
+		Hinh3 h = Factory.getHinh("HT");
+		h.xuat();
+		h = Factory.getHinh("HCN");
+		h.xuat();
+	}
+}

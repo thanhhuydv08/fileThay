@@ -1,0 +1,77 @@
+﻿package thucHanh;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class FrmChao extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrmChao frame = new FrmChao();
+					frame.setVisible(true);
+					ChayChu chayChu = new ChayChu(frame);
+					chayChu.start();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmChao() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JButton btnChao = new JButton("Ch\u00E0o");
+		btnChao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(rootPane, "Chào các bạn!");
+			}
+		});
+		btnChao.setBounds(171, 177, 89, 23);
+		contentPane.add(btnChao);
+	}
+}
+
+class ChayChu extends Thread{
+	private JFrame frame;
+	private String s;
+	public ChayChu(JFrame frame) {
+		this.frame=frame;
+		s ="Chào mừng các bạn đến với lập trình đa luồng		                               ";
+	}
+	@Override
+	public void run() {
+		while(true) {
+			try {
+				s=s.substring(1)+s.substring(0, 1);
+				frame.setTitle(s);
+				Thread.sleep(300);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}

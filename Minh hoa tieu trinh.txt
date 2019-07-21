@@ -1,0 +1,39 @@
+﻿package thucHanh;
+
+//buoc 1 : xay dung lop tieu trinh ke thua lop Thread
+class TieuTrinh1 extends Thread{
+	@Override
+	public void run() {
+		for(int i=1; i<=50; i++) {
+			try {
+				System.out.print(i+ " ");
+				Thread.sleep(300);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+class TieuTrinh2 extends Thread{
+	@Override
+	public void run() {
+		for(int i=51; i<=100; i++)
+			try {
+				System.out.print(i + " ");
+				Thread.sleep(300);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+	}
+}
+public class Vd1 {
+	public static void main(String[] args) {
+		//buoc 2: tao doi tuong tieu trinh
+		TieuTrinh1 tt1 = new TieuTrinh1();
+		TieuTrinh2 tt2 = new TieuTrinh2();
+		//buoc 3: goi ham start
+		tt1.start();
+		tt2.start();
+	}
+
+}

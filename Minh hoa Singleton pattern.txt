@@ -1,0 +1,29 @@
+﻿package thucHanh;
+
+class Singleton{
+	private static Singleton singleton;
+	private Singleton() {}
+	public static Singleton getSingleton() {
+		if(singleton==null)
+			singleton= new Singleton();
+		return singleton;
+	}
+}
+public class SingletonPattern {
+	public static void main(String[] args) {
+		StringBuilder sb1 = new StringBuilder();
+		StringBuilder sb2 = sb1; //new StringBuilder();
+		if(sb1.equals(sb2))
+			System.out.println("sb1 === sb2");
+		else
+			System.out.println("sb1 != sb2");
+		
+		Singleton sgt1 = Singleton.getSingleton();
+		Singleton sgt2 = Singleton.getSingleton();
+		if(sgt1.equals(sgt2))
+			System.out.println("sgt1 === sgt2");
+		else
+			System.out.println("sgt1 != sgt2");
+		
+	}
+}
